@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-	    <groupId>org.sonatype.oss</groupId>
-	    <artifactId>oss-parent</artifactId>
-	    <version>7</version>
-	</parent>
+	<!--<parent>-->
+	    <!--<groupId>org.sonatype.oss</groupId>-->
+	    <!--<artifactId>oss-parent</artifactId>-->
+	    <!--<version>7</version>-->
+	<!--</parent>-->
 	<groupId>io.springside</groupId>
 	<artifactId>springside-parent</artifactId>
 	<version>4.3.0-SNAPSHOT</version>
@@ -56,6 +56,11 @@
 		<!-- Plugin的属性 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.6</java.version>
+
+        <nexus.ip>192.168.0.88</nexus.ip>
+        <repository.nexus.url>http://${nexus.ip}:8081/nexus/content/groups/public</repository.nexus.url>
+        <repository.nexus.distribution.url>http://${nexus.ip}:8081/nexus/content/repositories/thirdparty</repository.nexus.distribution.url>
+
 	</properties>
 
 	<prerequisites>
@@ -82,6 +87,32 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories> -->
+
+	<repositories>
+		<repository>
+			<id>public</id>
+			<name>Public Repositories</name>
+			<url>${repository.nexus.url}</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>public</id>
+			<name>Public Repositories</name>
+			<url>${repository.nexus.url}</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<repository>
+			<id>thirdparty</id>
+			<name>3th party</name>
+			<url>${repository.nexus.distribution.url}</url>
+		</repository>
+	</distributionManagement>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 与  artifactId 即可 -->
 	<dependencyManagement>

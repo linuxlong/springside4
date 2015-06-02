@@ -15,6 +15,14 @@
 		<url>http://www.springside.org.cn</url>
 	</organization>
 
+	<properties>
+        <soul.version>1.0.1-SNAPSHOT</soul.version>
+        <nexus.ip>192.168.0.88</nexus.ip>
+        <repository.nexus.url>http://${nexus.ip}:8081/nexus/content/groups/public</repository.nexus.url>
+        <repository.nexus.distribution.url>http://${nexus.ip}:8081/nexus/content/repositories/thirdparty
+        </repository.nexus.distribution.url>
+	</properties>
+
 	<developers>
 		<developer>
 			<id>calvin</id>
@@ -50,4 +58,7 @@
         <connection>scm:git:git://github.com/springside/springside4.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:springside/springside4.git</developerConnection>
     </scm>
+
+
+
 </project>

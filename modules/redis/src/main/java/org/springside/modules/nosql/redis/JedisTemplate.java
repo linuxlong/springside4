@@ -210,6 +210,8 @@ public class JedisTemplate {
 
 	// / String Actions ///
 
+
+
 	/**
 	 * Get the value of the specified key. If the key does not exist null is
 	 * returned. If the value stored at key is not a string an error is returned
@@ -255,6 +257,8 @@ public class JedisTemplate {
 			}
 		});
 	}
+
+
 
 	/**
 	 * Set the string value as value of the key.
@@ -854,4 +858,111 @@ public class JedisTemplate {
 			}
 		});
 	}
+
+
+	//--Longer add begin--
+	/**
+	 * @param key
+	 * @return
+	 * @author Longer
+	 */
+	public byte[] get(final byte[] key) {
+		return execute(new JedisAction<byte[]>() {
+			@Override
+			public byte[] action(Jedis jedis) {
+				return jedis.get(key);
+			}
+		});
+	}
+
+	/**
+	 * @param key
+	 * @return
+	 * @author Longer
+	 */
+	public void set(final byte[] key, final byte[] value) {
+		execute(new JedisActionNoResult() {
+			@Override
+			public void action(Jedis jedis) {
+				jedis.set(key, value);
+			}
+		});
+	}
+
+	/**
+	 * @param key
+	 * @return
+	 * @author Longer
+	 */
+	public void set(final byte[] key, final byte[] value, final int expire) {
+		execute(new JedisActionNoResult() {
+			@Override
+			public void action(Jedis jedis) {
+				jedis.set(key, value);
+				jedis.expire(key,expire);
+			}
+		});
+	}
+
+	/**
+	 * @param keys
+	 * @return
+	 * @author Longer
+	 */
+	public Boolean del(final byte[]... keys) {
+		return execute(new JedisAction<Boolean>() {
+			@Override
+			public Boolean action(Jedis jedis) {
+				return jedis.del(keys) == keys.length ? true : false;
+			}
+		});
+	}
+
+	/**
+	 * @param pattern
+	 * @return
+	 * @author Longer
+	 */
+	public Set<String> keys(final String pattern){
+		return execute(new JedisAction<Set<String>>() {
+			@Override
+			public Set<String> action(Jedis jedis) {
+				return jedis.keys(pattern);
+			}
+		});
+	}
+
+	/**
+	 * @param pattern
+	 * @return
+	 * @author Longer
+	 */
+	public Set<byte[]> keys(final byte[] pattern){
+		return execute(new JedisAction<Set<byte[]>>() {
+			@Override
+			public Set<byte[]> action(Jedis jedis) {
+				return jedis.keys(pattern);
+			}
+		});
+	}
+
+	/**
+	 * @return
+	 * @author Longer
+	 */
+	public Long dbSize(){
+		return execute(new JedisAction<Long>() {
+			@Override
+			public Long action(Jedis jedis) {
+				return jedis.dbSize();
+			}
+		});
+	}
+
+
+
+
+
+
+	//--Longer add end--
 }
