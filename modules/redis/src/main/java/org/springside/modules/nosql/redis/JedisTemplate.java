@@ -959,10 +959,68 @@ public class JedisTemplate {
 		});
 	}
 
+	/**
+	 *
+	 * @param key
+	 * @param fieldName
+	 * @return
+	 * @author Longer
+	 */
+	public byte[] hget(final byte[] key, final byte[] fieldName) {
+		return execute(new JedisAction<byte[]>() {
+			@Override
+			public byte[] action(Jedis jedis) {
+				return jedis.hget(key, fieldName);
+			}
+		});
+	}
 
+	/**
+	 * @param key
+	 * @param fieldName
+	 * @param value
+	 * @author Longer
+	 */
+	public void hset(final byte[] key, final byte[] fieldName, final byte[] value) {
+		execute(new JedisActionNoResult() {
 
+			@Override
+			public void action(Jedis jedis) {
+				jedis.hset(key, fieldName, value);
+			}
+		});
+	}
 
+	/**
+	 *
+	 * @param key
+	 * @param fieldsNames
+	 * @return
+	 * @author Longer
+	 */
+	public List<byte[]> hmget(final byte[] key, final byte[]... fieldsNames) {
+		return execute(new JedisAction<List<byte[]>>() {
+			@Override
+			public List<byte[]> action(Jedis jedis) {
+				return jedis.hmget(key, fieldsNames);
+			}
+		});
+	}
 
+	/**
+	 * @param key
+	 * @param map
+	 * @author Longer
+	 */
+	public void hmset(final byte[] key, final Map<byte[], byte[]> map) {
+		execute(new JedisActionNoResult() {
+
+			@Override
+			public void action(Jedis jedis) {
+				jedis.hmset(key, map);
+			}
+		});
+	}
 
 	//--Longer add end--
 }
