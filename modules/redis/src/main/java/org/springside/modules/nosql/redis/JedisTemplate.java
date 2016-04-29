@@ -1022,5 +1022,17 @@ public class JedisTemplate {
 		});
 	}
 
+	/**
+	 * @param key
+	 * @author Longer
+	 */
+	public Map<byte[], byte[]> hgetAll(final byte[] key) {
+		return execute(new JedisAction<Map<byte[], byte[]>>() {
+			@Override
+			public Map<byte[], byte[]> action(Jedis jedis) {
+				return jedis.hgetAll(key);
+			}
+		});
+	}
 	//--Longer add end--
 }
