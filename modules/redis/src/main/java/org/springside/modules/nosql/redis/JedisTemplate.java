@@ -1022,6 +1022,23 @@ public class JedisTemplate {
 		});
 	}
 
+
+	/**
+	 * @param key
+	 * @param map
+	 * @author Longer
+	 */
+	public void hmset(final byte[] key, final Map<byte[], byte[]> map,final int expire) {
+		execute(new JedisActionNoResult() {
+
+			@Override
+			public void action(Jedis jedis) {
+				jedis.hmset(key, map);
+				jedis.expire(key,expire);
+			}
+		});
+	}
+
 	/**
 	 * @param key
 	 * @author Longer
