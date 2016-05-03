@@ -275,6 +275,22 @@ public class JedisTemplate {
 	}
 
 	/**
+	 * Set the string value as value of the key.
+	 * The string can't be longer than 1073741824 bytes (1 GB).
+	 * @author Longer
+	 */
+	public void set(final String key, final String value,final int expire) {
+		execute(new JedisActionNoResult() {
+
+			@Override
+			public void action(Jedis jedis) {
+				jedis.set(key, value);
+				jedis.expire(key,expire);
+			}
+		});
+	}
+
+	/**
 	 * The command is exactly equivalent to the following group of commands: {@link #set(String, String) SET} +
 	 * {@link #expire(String, int) EXPIRE}.
 	 * The operation is atomic.
