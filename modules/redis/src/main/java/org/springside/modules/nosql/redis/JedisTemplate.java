@@ -1067,5 +1067,57 @@ public class JedisTemplate {
 			}
 		});
 	}
+
+	/**
+	 * @param key
+	 * @author Longer
+	 */
+	public Long ttl(final String key) {
+		return execute(new JedisAction<Long>() {
+			@Override
+			public Long action(Jedis jedis) {
+				return jedis.ttl(key);
+			}
+		});
+	}
+
+	/**
+	 * @param key
+	 * @author Longer
+	 */
+	public Long ttl(final byte[] key) {
+		return execute(new JedisAction<Long>() {
+			@Override
+			public Long action(Jedis jedis) {
+				return jedis.ttl(key);
+			}
+		});
+	}
+
+	/**
+	 * @param key
+	 * @author Longer
+	 */
+	public Boolean exists(final String key) {
+		return execute(new JedisAction<Boolean>() {
+			@Override
+			public Boolean action(Jedis jedis) {
+				return jedis.exists(key);
+			}
+		});
+	}
+
+	/**
+	 * @param key
+	 * @author Longer
+	 */
+	public Boolean exists(final byte[] key) {
+		return execute(new JedisAction<Boolean>() {
+			@Override
+			public Boolean action(Jedis jedis) {
+				return jedis.exists(key);
+			}
+		});
+	}
 	//--Longer add end--
 }
